@@ -1,0 +1,11 @@
+0.1.1
+    Forces jailed players to respawn in associated jail
+0.1.0
+    Jailed players cannot place or break blocks, pick up or drop items, deal or take damage, interact w/ objects, or use commands
+    Restructured jails.yml
+    Updated plugin version from alpha to beta
+0.0.1
+    Added /jail [list], displays list of jails
+    Added /jail [set|del] (jail), changes a specified jail location
+    Added /jail (player) (jail), teleports specified player to jail
+    Added /unjail (player), teleports specified player to location prior to jail

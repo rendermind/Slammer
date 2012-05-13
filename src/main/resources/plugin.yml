@@ -1,0 +1,21 @@
+author: Stephen Monroe (VioVioCity)
+main: com.vioviocity.slammer.Slammer
+name: Slammer
+version: 0.1.0
+commands:
+  jail:
+    description:
+    usage: /<command> (player) (jail), /<command> [list], /<command> [set|del] (jail)
+  unjail:
+    description:
+    usage: /<command> (player)
+permissions:
+  slammer.jail:
+    description: Allows use of /jail (player) (jail), also unjail (player)
+    default: op
+  slammer.jail.list:
+    description: Allows use of /jail [list].
+    default: op
+  slammer.jail.set:
+    description: Allows use of /jail [set|del] (jail)
+    default: op
