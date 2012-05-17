@@ -14,8 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Slammer extends JavaPlugin implements Listener {
     
     static Logger log = Logger.getLogger("Slammer");
-    static public FileConfiguration jailConfig = null;
-    static File jailConfigFile = null;
+    static public FileConfiguration slammerConfig = null;
+    static File slammerConfigFile = null;
     
     @Override
     public void onDisable() {
@@ -29,40 +29,40 @@ public class Slammer extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new SlammerPlayerListener(), this);
         
         // setup config files
-        loadJailConfig();
-        saveJailConfig();
+        loadSlammerConfig();
+        saveSlammerConfig();
         
         // register commands
-        getCommand("jail").setExecutor(new JailCommand(this));
-        getCommand("unjail").setExecutor(new UnjailCommand(this));
+        getCommand("slam").setExecutor(new SlamCommand(this));
+        getCommand("free").setExecutor(new FreeCommand(this));
         
         // plugin enabled
         log.info(this + " is now enabled.");
     }
     
     // load jail config file
-    public FileConfiguration loadJailConfig() {
-        if (jailConfig == null) {
-            if (jailConfigFile == null)
-                jailConfigFile = new File(this.getDataFolder(), "jails.yml");
-            if (jailConfigFile.exists()) {
-                jailConfig = YamlConfiguration.loadConfiguration(jailConfigFile);
+    public FileConfiguration loadSlammerConfig() {
+        if (slammerConfig == null) {
+            if (slammerConfigFile == null)
+                slammerConfigFile = new File(this.getDataFolder(), "slammers.yml");
+            if (slammerConfigFile.exists()) {
+                slammerConfig = YamlConfiguration.loadConfiguration(slammerConfigFile);
             } else {
-                InputStream defConfigStream = getResource("jails.yml");
-                jailConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+                InputStream defConfigStream = getResource("slammers.yml");
+                slammerConfig = YamlConfiguration.loadConfiguration(defConfigStream);
             }
         }
-        return jailConfig;
+        return slammerConfig;
     }
     
     // save jail config file
-    static public void saveJailConfig() {
-        if (jailConfig == null || jailConfigFile == null)
+    static public void saveSlammerConfig() {
+        if (slammerConfig == null || slammerConfigFile == null)
             return;
         try {
-            jailConfig.save(jailConfigFile);
+            slammerConfig.save(slammerConfigFile);
         } catch (IOException e) {
-            log.severe("Unable to save jail config to " + jailConfigFile + '.');
+            log.severe("Unable to save Slammer config to " + slammerConfigFile + '.');
         }
     }
     
@@ -76,9 +76,9 @@ public class Slammer extends JavaPlugin implements Listener {
     }
     
     // check if player is jailed
-    static public boolean checkJailed(String playerName) {
-        JailCommand.jailed = Slammer.jailConfig.getStringList("slammer.jailed");
-        for (String each : JailCommand.jailed)
+    static public boolean checkSlammed(String playerName) {
+        SlamCommand.slammed = slammerConfig.getConfigurationSection("player").getKeys(false);
+        for (String each : SlamCommand.slammed)
             if (each.toLowerCase().contains(playerName.toLowerCase()))
                 return true;
         return false;
@@ -86,8 +86,8 @@ public class Slammer extends JavaPlugin implements Listener {
     
     // check jailed player name
     static public String whoJailed(String playerName) {
-        JailCommand.jailed = Slammer.jailConfig.getStringList("slammer.jailed");
-        for (String each : JailCommand.jailed)
+        SlamCommand.slammed = slammerConfig.getConfigurationSection("player").getKeys(false);
+        for (String each : SlamCommand.slammed)
             if (each.toLowerCase().contains(playerName))
                 return each;
         return "";

@@ -1,5 +1,11 @@
-0.1.1
+0.x.x
+    "Implement probation system"
+0.2.0
     Forces jailed players to respawn in associated jail
+    Changed commands from /jail & /unjail to /slam & /free
+    Changed permissions to slammer.slam, slammer.list, slammer.set
+    Changed jails.yml to slammers.yml & the file structure
+    Updated CraftBukkit 1.2.5-R1.3
 0.1.0
     Jailed players cannot place or break blocks, pick up or drop items, deal or take damage, interact w/ objects, or use commands
     Restructured jails.yml

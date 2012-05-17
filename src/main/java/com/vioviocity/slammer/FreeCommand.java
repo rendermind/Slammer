@@ -1,15 +1,16 @@
 package com.vioviocity.slammer;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class UnjailCommand implements CommandExecutor {
+public class FreeCommand implements CommandExecutor {
     
     private Slammer plugin;
-    public UnjailCommand(Slammer plugin) {
+    public FreeCommand(Slammer plugin) {
         this.plugin = plugin;
     }
     
@@ -23,29 +24,39 @@ public class UnjailCommand implements CommandExecutor {
         // command handler
         String cmd = command.getName().toLowerCase();
         
-        if (cmd.equals("unjail")) {
+        if (cmd.equals("free")) {
             // invalid args
             if (args.length < 1 || args.length > 1)
                 return false;
             
-            // unjail (player)
+            // free (player)
             if (args.length == 1) {
                 // check permission
-                if (!Slammer.checkPermission("slammer.jail", player))
+                if (!Slammer.checkPermission("slammer.slam", player))
                     return false;
                     
                 // initialize variables
                 String playerName = args[0];
-                JailCommand.jailed = Slammer.jailConfig.getStringList("slammer.jailed");
+                SlamCommand.slammed = Slammer.slammerConfig.getConfigurationSection("player").getKeys(false);
                 
                 // check players
-                for (String each : JailCommand.jailed) {
-                    if (each.toLowerCase().contains(playerName)) {
+                for (String each : SlamCommand.slammed) {
+                    if (each.toLowerCase().contains(playerName.toLowerCase())) {
                         
-                        // remove player from jail list
-                        JailCommand.jailed.remove(each);
-                        Slammer.jailConfig.set("slammer.jailed", JailCommand.jailed);
-                        Slammer.saveJailConfig();
+			// teleport player to prior location
+			Location prior = player.getLocation();
+			String playerPath = "player." + each + ".location.";
+			prior.setWorld(plugin.getServer().getWorld(Slammer.slammerConfig.getString(playerPath + "world")));
+			prior.setX(Slammer.slammerConfig.getDouble(playerPath + 'x'));
+			prior.setY(Slammer.slammerConfig.getDouble(playerPath + 'y'));
+			prior.setZ(Slammer.slammerConfig.getDouble(playerPath + 'z'));
+			prior.setYaw((float) Slammer.slammerConfig.getDouble(playerPath + "yaw"));
+			prior.setPitch((float) Slammer.slammerConfig.getDouble(playerPath + "pitch"));
+			
+                        // remove player from slammer list
+                        SlamCommand.slammed.remove(each);
+                        Slammer.slammerConfig.set("player." + each, null);
+                        Slammer.saveSlammerConfig();
                         
                         player.sendMessage(ChatColor.GREEN + each + " has been set free.");
                         return true;
@@ -53,7 +64,7 @@ public class UnjailCommand implements CommandExecutor {
                 }
                 
                 // player not found
-                player.sendMessage(ChatColor.RED + playerName + " is not jailed.");
+                player.sendMessage(ChatColor.RED + playerName + " is not slammed.");
                 return true;
             }
         }
