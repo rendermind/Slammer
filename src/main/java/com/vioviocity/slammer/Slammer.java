@@ -75,16 +75,20 @@ public class Slammer extends JavaPlugin implements Listener {
         return true;
     }
     
-    // check if player is jailed
+    // check if player is slammed
     static public boolean checkSlammed(String playerName) {
-        SlamCommand.slammed = slammerConfig.getConfigurationSection("player").getKeys(false);
+	
+	if (!slammerConfig.isConfigurationSection("player"))
+	    return false;
+        
+	SlamCommand.slammed = slammerConfig.getConfigurationSection("player").getKeys(false);
         for (String each : SlamCommand.slammed)
             if (each.toLowerCase().contains(playerName.toLowerCase()))
                 return true;
         return false;
     }
     
-    // check jailed player name
+    // check slammed player name
     static public String whoJailed(String playerName) {
         SlamCommand.slammed = slammerConfig.getConfigurationSection("player").getKeys(false);
         for (String each : SlamCommand.slammed)

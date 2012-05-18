@@ -43,18 +43,24 @@ public class FreeCommand implements CommandExecutor {
                 for (String each : SlamCommand.slammed) {
                     if (each.toLowerCase().contains(playerName.toLowerCase())) {
                         
-			// teleport player to prior location
-			Location prior = player.getLocation();
-			String playerPath = "player." + each + ".location.";
-			prior.setWorld(plugin.getServer().getWorld(Slammer.slammerConfig.getString(playerPath + "world")));
-			prior.setX(Slammer.slammerConfig.getDouble(playerPath + 'x'));
-			prior.setY(Slammer.slammerConfig.getDouble(playerPath + 'y'));
-			prior.setZ(Slammer.slammerConfig.getDouble(playerPath + 'z'));
-			prior.setYaw((float) Slammer.slammerConfig.getDouble(playerPath + "yaw"));
-			prior.setPitch((float) Slammer.slammerConfig.getDouble(playerPath + "pitch"));
+			// find player online
+			for (Player another : plugin.getServer().getOnlinePlayers()) {
+			    if (another.getName().toLowerCase().contains(playerName.toLowerCase())) {
+				
+				// teleport player to prior location
+				Location prior = another.getLocation();
+				String playerPath = "player." + each + ".location.";
+				prior.setWorld(plugin.getServer().getWorld(Slammer.slammerConfig.getString(playerPath + "world")));
+				prior.setX(Slammer.slammerConfig.getDouble(playerPath + 'x'));
+				prior.setY(Slammer.slammerConfig.getDouble(playerPath + 'y'));
+				prior.setZ(Slammer.slammerConfig.getDouble(playerPath + 'z'));
+				prior.setYaw((float) Slammer.slammerConfig.getDouble(playerPath + "yaw"));
+				prior.setPitch((float) Slammer.slammerConfig.getDouble(playerPath + "pitch"));
+				another.teleport(prior);
+			    }
+			}
 			
                         // remove player from slammer list
-                        SlamCommand.slammed.remove(each);
                         Slammer.slammerConfig.set("player." + each, null);
                         Slammer.saveSlammerConfig();
                         

@@ -71,10 +71,10 @@ public class SlamCommand implements CommandExecutor {
                 String slammerName = args[1];
                 String path = "slammer." + slammerName.toLowerCase() + '.';
                 
-                // jail [set] (jail)
+                // slam [set] (slammer)
                 if (args[0].equalsIgnoreCase("set")) {
                     
-                    // save jail
+                    // save slammer
                     Slammer.slammerConfig.set(path + "world", player.getLocation().getWorld().getName());
                     Slammer.slammerConfig.set(path + "x", player.getLocation().getX());
                     Slammer.slammerConfig.set(path + "y", player.getLocation().getY());
@@ -86,7 +86,7 @@ public class SlamCommand implements CommandExecutor {
                     return true;
                 }
                 
-                // slam [del] (jail)
+                // slam [del] (slammer)
                 if (args[0].equalsIgnoreCase("del")) {
                     
                     // check slammers
@@ -117,7 +117,10 @@ public class SlamCommand implements CommandExecutor {
                 String playerName = args[0];
                 String slammerName = args[1];
                 String slammerPath = "slammer." + slammerName.toLowerCase() + '.';
-                slammed = Slammer.slammerConfig.getConfigurationSection("player").getKeys(false);
+		//if (Slammer.slammerConfig.isConfigurationSection("player"))
+		//    slammed = Slammer.slammerConfig.getConfigurationSection("player").getKeys(false);
+		//else
+		//    slammed = Collections.EMPTY_SET;
                 
                 // check if already slammed
                 if (Slammer.checkSlammed(playerName)) {
@@ -134,7 +137,7 @@ public class SlamCommand implements CommandExecutor {
                             if (slammerName.equalsIgnoreCase(another)) {
 				
 				// save player location
-				Location prior = player.getLocation();
+				Location prior = each.getLocation();
 				String playerPath = "player." + each.getName() + ".location.";
 				Slammer.slammerConfig.set(playerPath + "world", prior.getWorld().getName());
 				Slammer.slammerConfig.set(playerPath + 'x', prior.getX());
@@ -145,6 +148,7 @@ public class SlamCommand implements CommandExecutor {
                                 
 				// save player slammer
 				Slammer.slammerConfig.set("player." + each.getName() + ".slammer", another);
+				Slammer.saveSlammerConfig();
 				
                                 // teleport player to slammer
                                 Location slammer = player.getLocation();
@@ -155,11 +159,6 @@ public class SlamCommand implements CommandExecutor {
                                 slammer.setYaw((float) Slammer.slammerConfig.getDouble(slammerPath + "yaw"));
                                 slammer.setPitch((float) Slammer.slammerConfig.getDouble(slammerPath + "pitch"));
                                 each.teleport(slammer);
-                                
-                                // add player to slammer list
-                                slammed.add(each.getName());
-                                Slammer.slammerConfig.set("player", slammed);
-                                Slammer.saveSlammerConfig();
                                 
                                 player.sendMessage(ChatColor.RED + each.getName() + " has been slammed to " + another + '.');
 				each.sendMessage(ChatColor.RED + player.getName() + " has slammed you.");

@@ -5,17 +5,17 @@ version: 0.2.0
 commands:
   slam:
     description:
-    usage: /<command> (player) (jail), /<command> [list], /<command> [set|del] (jail)
+    usage: /<command> (player) (jail), /<command> [list], /<command> [set|del] (slammer)
   free:
     description:
     usage: /<command> (player)
 permissions:
   slammer.slam:
-    description: Allows use of /jail (player) (jail), also unjail (player)
+    description: Allows use of /slam (player) (slammer), also unjail (player)
     default: op
   slammer.list:
-    description: Allows use of /jail [list].
+    description: Allows use of /slam [list].
     default: op
   slammer.set:
-    description: Allows use of /jail [set|del] (jail)
+    description: Allows use of /slam [set|del] (slammer)
     default: op
