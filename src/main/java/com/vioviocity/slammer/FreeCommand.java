@@ -18,19 +18,19 @@ public class FreeCommand implements CommandExecutor {
         if (!(sender instanceof Player))
             return true;
         
-        // initialize core variables
+        // initialize variables
         Player player = (Player) sender;
         
         // command handler
         String cmd = command.getName().toLowerCase();
-        
         if (cmd.equals("free")) {
             // invalid args
             if (args.length < 1 || args.length > 1)
                 return false;
             
-            // free (player)
+            // <command> (player)
             if (args.length == 1) {
+		
                 // check permission
                 if (!Slammer.checkPermission("slammer.slam", player))
                     return false;

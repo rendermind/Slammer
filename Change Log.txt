@@ -1,11 +1,8 @@
-0.x.x
-    "Implement probation system"
 0.3.0
-    
+    "language support"
     Now supports Metrics w/ mcstats.org
     Updated to CraftBukkit 1.2.5-R2.0
 0.2.0
-    Forces jailed players to respawn in associated jail
     Changed commands from /jail & /unjail to /slam & /free
     Changed permissions to slammer.slam, slammer.list, slammer.set
     Changed jails.yml to slammers.yml & the file structure

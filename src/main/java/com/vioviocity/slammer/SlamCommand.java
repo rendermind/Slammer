@@ -1,8 +1,6 @@
 package com.vioviocity.slammer;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -24,7 +22,7 @@ public class SlamCommand implements CommandExecutor {
         if (!(sender instanceof Player))
             return true;
         
-        // initialize core variables
+        // initialize variables
         Player player = (Player) sender;
         Set <String> slammers = Collections.EMPTY_SET;
         
@@ -35,13 +33,15 @@ public class SlamCommand implements CommandExecutor {
         // command handler
         String cmd = command.getName().toLowerCase();
         if (cmd.equals("slam")) {
+	    
             // invalid args
             if (args.length < 1 || args.length > 2)
                 return false;
             
-            // slam [list]
+            // <command> [list]
             if (args.length == 1) {
                 if(args[0].equalsIgnoreCase("list")) {
+		    
                     // check permission
                     if (!Slammer.checkPermission("slammer.list", player))
                         return true;
@@ -61,8 +61,9 @@ public class SlamCommand implements CommandExecutor {
                 }
             }
             
-            // slam [set|del] (slammer)
+            // <command> [set|del] (slammer)
             if (args.length == 2) {
+		
                 //check permission
                 if (!Slammer.checkPermission("slammer.set", player))
                     return true;
@@ -71,7 +72,7 @@ public class SlamCommand implements CommandExecutor {
                 String slammerName = args[1];
                 String path = "slammer." + slammerName.toLowerCase() + '.';
                 
-                // slam [set] (slammer)
+                // <command> [set] (slammer)
                 if (args[0].equalsIgnoreCase("set")) {
                     
                     // save slammer
@@ -86,7 +87,7 @@ public class SlamCommand implements CommandExecutor {
                     return true;
                 }
                 
-                // slam [del] (slammer)
+                // <command> [del] (slammer)
                 if (args[0].equalsIgnoreCase("del")) {
                     
                     // check slammers
@@ -107,8 +108,9 @@ public class SlamCommand implements CommandExecutor {
                 }
             }
             
-            // slam (player) (slammer)
+            // <command> (player) (slammer)
             if (args.length == 2) {
+		
                 // check permission
                 if (!Slammer.checkPermission("slammer.slam", player))
                     return false;
@@ -117,10 +119,6 @@ public class SlamCommand implements CommandExecutor {
                 String playerName = args[0];
                 String slammerName = args[1];
                 String slammerPath = "slammer." + slammerName.toLowerCase() + '.';
-		//if (Slammer.slammerConfig.isConfigurationSection("player"))
-		//    slammed = Slammer.slammerConfig.getConfigurationSection("player").getKeys(false);
-		//else
-		//    slammed = Collections.EMPTY_SET;
                 
                 // check if already slammed
                 if (Slammer.checkSlammed(playerName)) {
