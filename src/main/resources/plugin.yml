@@ -1,17 +1,17 @@
 author: Stephen Monroe (VioVioCity)
 main: com.vioviocity.slammer.Slammer
 name: Slammer
-version: 0.2.0
+version: 0.3.0
 commands:
   slam:
     description:
-    usage: /<command> (player) (jail), /<command> [list], /<command> [set|del] (slammer)
+    usage: /<command> (player) (slammer), /<command> [list], /<command> [set|del] (slammer)
   free:
     description:
     usage: /<command> (player)
 permissions:
   slammer.slam:
-    description: Allows use of /slam (player) (slammer), also unjail (player)
+    description: Allows use of /slam (player) (slammer), also /free (player)
     default: op
   slammer.list:
     description: Allows use of /slam [list].

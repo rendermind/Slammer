@@ -35,6 +35,14 @@ public class Slammer extends JavaPlugin implements Listener {
         // register commands
         getCommand("slam").setExecutor(new SlamCommand(this));
         getCommand("free").setExecutor(new FreeCommand(this));
+	
+	// metrics
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (IOException e) {
+            log.warning("[Shout] Unable to submit metrics.");
+        }
         
         // plugin enabled
         log.info(this + " is now enabled.");
