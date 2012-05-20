@@ -63,14 +63,13 @@ public class FreeCommand implements CommandExecutor {
                         // remove player from slammer list
                         Slammer.slammerConfig.set("player." + each, null);
                         Slammer.saveSlammerConfig();
-                        
-                        player.sendMessage(ChatColor.GREEN + each + " has been set free.");
+			player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("free.freed").replace("%name%", each));
                         return true;
                     }
                 }
                 
                 // player not found
-                player.sendMessage(ChatColor.RED + playerName + " is not slammed.");
+		player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("free.not_jailed").replace("%name%", playerName));
                 return true;
             }
         }

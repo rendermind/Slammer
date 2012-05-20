@@ -1,0 +1,19 @@
+slammer:
+  enabled: "%plugin% est maintenant activé."
+  disabled: "%plugin% est maintenant désactivé."
+  metrics: "Impossible de soumettre métriques."
+  config: "Impossible de sauvegarder la configuration %plugin% %path%"
+  permission: "Vous n'avez pas la permission."
+slam:
+  jails: "Les prisons"
+  not_set: "Les prisons n'ont pas été fixée."
+  not_exist: "Prison n'existe pas."
+  not_online: "Joueur n'est pas en ligne."
+  already: "Joueur est déjà en prison."
+  set: "Prison %name% définie."
+  del: "Prison %name% supprimé."
+  jailed_to: "%player% a été emprisonné à %jail%."
+  jailed_from: "%name% a vous en prison."
+free:
+  freed: "%name% a été mis en liberté."
+  not_jailed: "%name% n'est pas en prison."

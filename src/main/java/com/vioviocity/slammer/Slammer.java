@@ -14,13 +14,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Slammer extends JavaPlugin implements Listener {
     
     static Logger log = Logger.getLogger("Slammer");
+    
     static public FileConfiguration slammerConfig = null;
     static File slammerConfigFile = null;
+    static public FileConfiguration langConfig = null;
+    static File langConfigFile = null;
     
     @Override
     public void onDisable() {
         // plugin disabled
-        log.info(this + " is now disabled.");
+        log.info(langConfig.getString("slammer.disabled").replace("%plugin%", this.toString()));
     }
 
     @Override
@@ -31,6 +34,7 @@ public class Slammer extends JavaPlugin implements Listener {
         // setup config files
         loadSlammerConfig();
         saveSlammerConfig();
+	loadLangConfig();
         
         // register commands
         getCommand("slam").setExecutor(new SlamCommand(this));
@@ -41,43 +45,58 @@ public class Slammer extends JavaPlugin implements Listener {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (IOException e) {
-            log.warning("[Shout] Unable to submit metrics.");
+            log.warning("[Shout] " + langConfig.getString("slammer.metrics"));
         }
         
         // plugin enabled
-        log.info(this + " is now enabled.");
+        log.info(langConfig.getString("slammer.enabled").replace("%plugin%", this.toString()));
     }
     
-    // load jail config file
+    // load slammer config file
     public FileConfiguration loadSlammerConfig() {
         if (slammerConfig == null) {
             if (slammerConfigFile == null)
-                slammerConfigFile = new File(this.getDataFolder(), "slammers.yml");
+                slammerConfigFile = new File(this.getDataFolder(), "slammer.yml");
             if (slammerConfigFile.exists()) {
                 slammerConfig = YamlConfiguration.loadConfiguration(slammerConfigFile);
             } else {
-                InputStream defConfigStream = getResource("slammers.yml");
+                InputStream defConfigStream = getResource("slammer.yml");
                 slammerConfig = YamlConfiguration.loadConfiguration(defConfigStream);
             }
         }
         return slammerConfig;
     }
     
-    // save jail config file
+    // save slammer config file
     static public void saveSlammerConfig() {
         if (slammerConfig == null || slammerConfigFile == null)
             return;
         try {
             slammerConfig.save(slammerConfigFile);
         } catch (IOException e) {
-            log.severe("Unable to save Slammer config to " + slammerConfigFile + '.');
+            log.severe(langConfig.getString("slammer.config").replace("%plugin%", "Slammer").replace("%path%", slammerConfigFile.toString()));
         }
+    }
+    
+    // load lang config file
+    public FileConfiguration loadLangConfig() {
+	if (langConfig == null) {
+	    if (langConfigFile == null)
+		langConfigFile = new File(this.getDataFolder(), slammerConfig.getString("language") + ".yml");
+	    if (langConfigFile.exists()) {
+		langConfig = YamlConfiguration.loadConfiguration(langConfigFile);
+	    } else {
+		InputStream defConfigStream = getResource(slammerConfig.getString("language") + ".yml");
+		langConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	    }
+	}
+	return langConfig;
     }
     
     // permission handler
     static public boolean checkPermission(String permission, Player player) {
         if (!player.hasPermission(permission)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission.");
+            player.sendMessage(ChatColor.RED + langConfig.getString("slammer.permission"));
             return false;
         }
         return true;

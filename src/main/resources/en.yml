@@ -1,0 +1,19 @@
+slammer:
+  enabled: "%plugin% is now enabled."
+  disabled: "%plugin% is now disabled."
+  metrics: "Unable to submit metrics."
+  config: "Unable to save %plugin% configuration to %path%."
+  permission: "You do not have permission."
+slam:
+  jails: "Slammers"
+  not_set: "Slammers have not been set."
+  not_exist: "Slammer does not exist."
+  not_online: "Player is not online."
+  already: "Player is already slammed."
+  set: "Slammer %name% set."
+  del: "Slammer %name% deleted."
+  jailed_to: "%player% has been slammed to %jail%."
+  jailed_from: "%name% has slammed you."
+free:
+  freed: "%name% has been set free."
+  not_jailed: "%name% is not slammed."

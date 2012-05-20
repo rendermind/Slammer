@@ -47,7 +47,7 @@ public class SlamCommand implements CommandExecutor {
                         return true;
                     
                     if (slammers.isEmpty()) {
-                        player.sendMessage(ChatColor.RED + "Slammers have not been set.");
+			player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_set"));
                         return true;
                     }
                     
@@ -56,7 +56,7 @@ public class SlamCommand implements CommandExecutor {
                     for (String each : slammers)
                         slammerList += each + ", ";
                     slammerList = slammerList.substring(0, slammerList.length() - 2);
-                    player.sendMessage(ChatColor.GREEN + "Slammers: " + ChatColor.WHITE + slammerList);
+                    player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("slam.jails") + ": " + ChatColor.WHITE + slammerList);
                     return true;
                 }
             }
@@ -83,7 +83,7 @@ public class SlamCommand implements CommandExecutor {
                     Slammer.slammerConfig.set(path + "yaw", player.getLocation().getYaw());
                     Slammer.slammerConfig.set(path + "pitch", player.getLocation().getPitch());
                     Slammer.saveSlammerConfig();
-                    player.sendMessage(ChatColor.GREEN + "Slammer " + slammerName + " set.");
+		    player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("slam.set").replace("%name%", slammerName));
                     return true;
                 }
                 
@@ -97,13 +97,13 @@ public class SlamCommand implements CommandExecutor {
                             // delete slammers
                             Slammer.slammerConfig.set("slammer." + slammerName, null);
                             Slammer.saveSlammerConfig();
-                            player.sendMessage(ChatColor.RED + "Slammer " + each + " deleted.");
+                            player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.del").replace("%name%", each));
                             return true;
                         }
                     }
                     
                     // jail not found
-                    player.sendMessage(ChatColor.RED + "Slammer does not exist.");
+                    player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_exist"));
                     return true;
                 }
             }
@@ -122,7 +122,7 @@ public class SlamCommand implements CommandExecutor {
                 
                 // check if already slammed
                 if (Slammer.checkSlammed(playerName)) {
-                    player.sendMessage(ChatColor.RED + Slammer.whoJailed(playerName) + " is already slammed.");
+		    player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.already"));
                     return true;
                 }
                 
@@ -157,21 +157,21 @@ public class SlamCommand implements CommandExecutor {
                                 slammer.setYaw((float) Slammer.slammerConfig.getDouble(slammerPath + "yaw"));
                                 slammer.setPitch((float) Slammer.slammerConfig.getDouble(slammerPath + "pitch"));
                                 each.teleport(slammer);
-                                
-                                player.sendMessage(ChatColor.RED + each.getName() + " has been slammed to " + another + '.');
-				each.sendMessage(ChatColor.RED + player.getName() + " has slammed you.");
+				player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.jailed_to")
+					.replace("%player%", each.getName()).replace("%jail%", player.getName()));
+				each.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.jailed_from").replace("%name%", player.getName()));
                                 return true;
                             }
                         }
                         
                         // slammer not found
-                        player.sendMessage(ChatColor.RED + slammerName + " does not exist.");
+                        player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_exist"));
                         return true;
                     }
                 }
                 
                 // player not found
-                player.sendMessage(ChatColor.RED + playerName + " is not online.");
+                player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_online"));
                 return true;
             }
         }

@@ -1,5 +1,6 @@
 0.3.0
-    "language support"
+    Now supports English, Spanish, French, & German translated by Google Translate.
+    Changed slammers.yml to slammer.yml, plus added node "language"
     Now supports Metrics w/ mcstats.org
     Updated to CraftBukkit 1.2.5-R2.0
 0.2.0
