@@ -1,3 +1,6 @@
+0.3.1
+    Fixed Issue: command /slam reading permissions incorrectly
+    Updated to CraftBukkit 1.2.5-R3.0
 0.3.0
     Now supports English, Spanish, French, & German translated by Google Translate.
     Changed slammers.yml to slammer.yml, plus added node "language"

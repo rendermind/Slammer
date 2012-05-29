@@ -61,8 +61,8 @@ public class SlamCommand implements CommandExecutor {
                 }
             }
             
-            // <command> [set|del] (slammer)
-            if (args.length == 2) {
+            // <command> [set| (slammer)
+            if (args.length == 2 && args[0].equalsIgnoreCase("set")) {
 		
                 //check permission
                 if (!Slammer.checkPermission("slammer.set", player))
@@ -71,41 +71,45 @@ public class SlamCommand implements CommandExecutor {
                 //initialize variables
                 String slammerName = args[1];
                 String path = "slammer." + slammerName.toLowerCase() + '.';
-                
-                // <command> [set] (slammer)
-                if (args[0].equalsIgnoreCase("set")) {
                     
-                    // save slammer
-                    Slammer.slammerConfig.set(path + "world", player.getLocation().getWorld().getName());
-                    Slammer.slammerConfig.set(path + "x", player.getLocation().getX());
-                    Slammer.slammerConfig.set(path + "y", player.getLocation().getY());
-                    Slammer.slammerConfig.set(path + "z", player.getLocation().getZ());
-                    Slammer.slammerConfig.set(path + "yaw", player.getLocation().getYaw());
-                    Slammer.slammerConfig.set(path + "pitch", player.getLocation().getPitch());
-                    Slammer.saveSlammerConfig();
-		    player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("slam.set").replace("%name%", slammerName));
+                // save slammer
+                Slammer.slammerConfig.set(path + "world", player.getLocation().getWorld().getName());
+                Slammer.slammerConfig.set(path + "x", player.getLocation().getX());
+                Slammer.slammerConfig.set(path + "y", player.getLocation().getY());
+                Slammer.slammerConfig.set(path + "z", player.getLocation().getZ());
+                Slammer.slammerConfig.set(path + "yaw", player.getLocation().getYaw());
+                Slammer.slammerConfig.set(path + "pitch", player.getLocation().getPitch());
+                Slammer.saveSlammerConfig();
+		player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("slam.set").replace("%name%", slammerName));
+                return true;
+	    }
+                
+            // <command> [del] (slammer)
+            if (args.length == 2 && args[0].equalsIgnoreCase("del")) {
+                    
+		//check permission
+                if (!Slammer.checkPermission("slammer.set", player))
                     return true;
-                }
-                
-                // <command> [del] (slammer)
-                if (args[0].equalsIgnoreCase("del")) {
-                    
-                    // check slammers
-                    for (String each : slammers) {
-                        if (slammerName.equalsIgnoreCase(each)) {
+		
+		//initialize variables
+                String slammerName = args[1];
+                String path = "slammer." + slammerName.toLowerCase() + '.';
+		
+                // check slammers
+                for (String each : slammers) {
+                    if (slammerName.equalsIgnoreCase(each)) {
                             
-                            // delete slammers
-                            Slammer.slammerConfig.set("slammer." + slammerName, null);
-                            Slammer.saveSlammerConfig();
-                            player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.del").replace("%name%", each));
-                            return true;
-                        }
+                        // delete slammers
+                        Slammer.slammerConfig.set("slammer." + slammerName, null);
+                        Slammer.saveSlammerConfig();
+                        player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.del").replace("%name%", each));
+                        return true;
                     }
-                    
-                    // jail not found
-                    player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_exist"));
-                    return true;
                 }
+                    
+                // jail not found
+                player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("slam.not_exist"));
+                return true;
             }
             
             // <command> (player) (slammer)

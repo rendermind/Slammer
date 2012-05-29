@@ -24,6 +24,7 @@ public class FreeCommand implements CommandExecutor {
         // command handler
         String cmd = command.getName().toLowerCase();
         if (cmd.equals("free")) {
+	    
             // invalid args
             if (args.length < 1 || args.length > 1)
                 return false;
