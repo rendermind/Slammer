@@ -1,4 +1,4 @@
-package com.vioviocity.slammer;
+package co.viocode.slammer;
 
 import java.util.Collections;
 import java.util.Set;

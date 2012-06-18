@@ -1,3 +1,6 @@
+1.0.1
+    Command /free now accessible via console
+    Updated to CraftBukkit 1.2.5-R4.0
 1.0.0
     Fixed Issue: command /slam reading permissions incorrectly
     Updated to CraftBukkit 1.2.5-R3.0

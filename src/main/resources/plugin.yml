@@ -1,7 +1,7 @@
 author: Stephen Monroe (VioVioCity)
 main: com.vioviocity.slammer.Slammer
 name: Slammer
-version: 1.0.0
+version: 1.0.1
 commands:
   slam:
     description:

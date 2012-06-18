@@ -1,4 +1,4 @@
-package com.vioviocity.slammer;
+package co.viocode.slammer;
 
 /*
  * Copyright 2011 Tyler Blair. All rights reserved.

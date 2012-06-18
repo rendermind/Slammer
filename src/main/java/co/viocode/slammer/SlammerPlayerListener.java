@@ -1,4 +1,4 @@
-package com.vioviocity.slammer;
+package co.viocode.slammer;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

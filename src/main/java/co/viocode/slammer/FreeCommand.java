@@ -1,4 +1,4 @@
-package com.vioviocity.slammer;
+package co.viocode.slammer;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,11 +15,15 @@ public class FreeCommand implements CommandExecutor {
     }
     
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        // check if player
+        Boolean isPlayer = true;
         if (!(sender instanceof Player))
-            return true;
+            isPlayer = false;
         
         // initialize variables
-        Player player = (Player) sender;
+        Player player = null;
+        if (isPlayer)
+            player = (Player) sender;
         
         // command handler
         String cmd = command.getName().toLowerCase();
@@ -64,13 +68,13 @@ public class FreeCommand implements CommandExecutor {
                         // remove player from slammer list
                         Slammer.slammerConfig.set("player." + each, null);
                         Slammer.saveSlammerConfig();
-			player.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("free.freed").replace("%name%", each));
+			sender.sendMessage(ChatColor.GREEN + Slammer.langConfig.getString("free.freed").replace("%name%", each));
                         return true;
                     }
                 }
                 
                 // player not found
-		player.sendMessage(ChatColor.RED + Slammer.langConfig.getString("free.not_jailed").replace("%name%", playerName));
+		sender.sendMessage(ChatColor.RED + Slammer.langConfig.getString("free.not_jailed").replace("%name%", playerName));
                 return true;
             }
         }
