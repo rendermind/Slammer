@@ -1,3 +1,6 @@
+1.0.2
+    Fixed Issue: Unable to load plugin due to package refactoring
+    Now supports Italian, translated by DAoM100
 1.0.1
     Command /free now accessible via console
     Updated to CraftBukkit 1.2.5-R4.0
