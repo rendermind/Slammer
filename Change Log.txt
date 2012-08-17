@@ -1,31 +1,31 @@
 1.0.3
 	Updated to CraftBukkit 1.3.1-R1.0
 1.0.2
-    Fixed Issue: Unable to load plugin due to package refactoring
-    Now supports Italian, translated by DAoM100
+	Fixed Issue: Unable to load plugin due to package refactoring
+	Now supports Italian, translated by DAoM100
 1.0.1
-    Command /free now accessible via console
-    Updated to CraftBukkit 1.2.5-R4.0
+	Command /free now accessible via console
+	Updated to CraftBukkit 1.2.5-R4.0
 1.0.0
-    Fixed Issue: command /slam reading permissions incorrectly
-    Updated to CraftBukkit 1.2.5-R3.0
-    Updated plugin version from beta to release
+	Fixed Issue: command /slam reading permissions incorrectly
+	Updated to CraftBukkit 1.2.5-R3.0
+	Updated plugin version from beta to release
 0.3.0
-    Now supports English, Spanish, French, & German translated by Google Translate.
-    Changed slammers.yml to slammer.yml, plus added node "language"
-    Now supports Metrics w/ mcstats.org
-    Updated to CraftBukkit 1.2.5-R2.0
+	Now supports English, Spanish, French, & German translated by Google Translate.
+	Changed slammers.yml to slammer.yml, plus added node "language"
+	Now supports Metrics w/ mcstats.org
+	Updated to CraftBukkit 1.2.5-R2.0
 0.2.0
-    Changed commands from /jail & /unjail to /slam & /free
-    Changed permissions to slammer.slam, slammer.list, slammer.set
-    Changed jails.yml to slammers.yml & the file structure
-    Updated CraftBukkit 1.2.5-R1.3
+	Changed commands from /jail & /unjail to /slam & /free
+	Changed permissions to slammer.slam, slammer.list, slammer.set
+	Changed jails.yml to slammers.yml & the file structure
+	Updated CraftBukkit 1.2.5-R1.3
 0.1.0
-    Jailed players cannot place or break blocks, pick up or drop items, deal or take damage, interact w/ objects, or use commands
-    Restructured jails.yml
-    Updated plugin version from alpha to beta
+	Jailed players cannot place or break blocks, pick up or drop items, deal or take damage, interact w/ objects, or use commands
+	Restructured jails.yml
+	Updated plugin version from alpha to beta
 0.0.1
-    Added /jail [list], displays list of jails
-    Added /jail [set|del] (jail), changes a specified jail location
-    Added /jail (player) (jail), teleports specified player to jail
-    Added /unjail (player), teleports specified player to location prior to jail
+	Added /jail [list], displays list of jails
+	Added /jail [set|del] (jail), changes a specified jail location
+	Added /jail (player) (jail), teleports specified player to jail
+	Added /unjail (player), teleports specified player to location prior to jail
